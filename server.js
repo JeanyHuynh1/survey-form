@@ -1,25 +1,24 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cookieParser from 'cookie-parser'
-import compress from 'compression'
-import cors from 'cors'
-import helmet from 'helmet'
+import app from './server/express.js'
+import config from './config/config.js'
+import mongoose from 'mongoose';
 
-const app = express()
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cookieParser())
-app.use(compress())
-app.use(helmet())
-app.use(cors())
-
-const port = 8080
-app.listen(port, () =>{
-    console.log('port running on ' + port)
+mongoose.Promise = global.Promise
+mongoose.connect(config.mongoUri, { 
+    //useNewUrlParser: true,
+    //useCreateIndex: true, 
+    //useUnifiedTopology: true 
+}).then(() => {
+    console.log("Connected to the database!");
+})
+mongoose.connection.on('error', () => {
+    throw new Error(`unable to connect to database: ${config.mongoUri}`) 
 })
 
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to User application." });
-});
 
-export default app
+
+app.listen(config.port, (err) => { 
+    if (err) {
+        console.log(err) 
+    }
+    console.info('Server started on port %s.', config.port) 
+})
