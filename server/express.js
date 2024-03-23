@@ -5,6 +5,7 @@ import compression from "compression";
 import cors from 'cors'
 import helmet from "helmet";
 import userRoutes from './routes/user.routes.js'
+import surveyRoutes from './routes/survey.routes.js'
 
 const app = express()
 
@@ -20,5 +21,6 @@ app.use(cookieParser())
 app.use(compression())
 app.use(helmet())
 app.use(cors())
-app.use('/', userRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/surveys', surveyRoutes)
 export default app
