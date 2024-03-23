@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
                 },
             },
             config.jwtSecret,
-            { expiresIn: "15m" }
+            { expiresIn: "60m" }
         );
         res.status(200).json({ accessToken });
     } else {
