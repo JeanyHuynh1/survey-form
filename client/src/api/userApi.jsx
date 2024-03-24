@@ -10,7 +10,6 @@ export class UserServices {
     static async loginUser (loginData) {
         try {
             const response = await axios.post('http://localhost:8080/api/users/login', loginData);
-            console.log('response.data', response.data);
             return response.data;
         }
         catch {
@@ -30,6 +29,22 @@ export class SurveyServices {
 
     static async CreateSurvey(surveyData) {
         return await axios.post(`http://localhost:8080/api/surveys`, surveyData, {
+            headers: {
+                Authorization: token ? `Bearer ${token}` : '',
+            }
+        });
+    }
+
+    static async updateSurvey(surveyID, surveyData) {
+        return await axios.put(`http://localhost:8080/api/surveys/${surveyID}`, surveyData, {
+            headers: {
+                Authorization: token ? `Bearer ${token}` : '',
+            }
+        });
+    }
+
+    static async deleteSurvey(surveyID) {
+        return await axios.delete(`http://localhost:8080/api/surveys/${surveyID}`, {
             headers: {
                 Authorization: token ? `Bearer ${token}` : '',
             }
