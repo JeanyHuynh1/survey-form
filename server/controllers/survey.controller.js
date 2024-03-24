@@ -9,19 +9,18 @@ const getSurveys = async (req, res) => {
 
 const createSurvey = async (req, res) => {
     console.log("The request body is :", req.body);
-    const { name, gender, email, semester, learningPlatform, accessOfMaterial, interactionWithInstructors, onlineTool, comments} = req.body;
-    if (!name || !email || !gender || !semester || !learningPlatform || !accessOfMaterial || !interactionWithInstructors || !onlineTool) {
+    const { name, gender, email, platform, access, interaction, recommendations, comments} = req.body;
+    if (!name || !email || !gender || !platform || !access || !interaction || !recommendations) {
       res.status(400).json({message:"All fields are mandatory !"});
     }
     const survey = await Survey.create({
       name,
       email,
       gender,
-      semester,
-      learningPlatform,
-      accessOfMaterial,
-      interactionWithInstructors,
-      onlineTool,
+      platform,
+      access,
+      interaction,
+      recommendations,
       comments,
       user_id: req.user.id,
     });

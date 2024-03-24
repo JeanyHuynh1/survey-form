@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.surveys-container {
+    width: 80%;
+    background-color: white;
+    margin-top: 20px;
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 400px; /* Adjust based on your needs */
+    border: 1px solid #ccc; /* Optional: adds border around the container */
+}
+
+.survey-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee; /* Border bottom for each item */
+    color: black; /* Ensure text color is visible */
+    background-color: white; /* Temporarily make background always visible */
+    cursor: pointer;
+}
+
+.survey-item:hover {
+    background-color: #676565; /* Hover effect */
+}
+
+
+p {
+    margin: 0;
+}

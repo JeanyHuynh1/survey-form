@@ -18,24 +18,20 @@ const surveySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    semester: {
-        type: Number,
-        required: true
-    },
-    learningPlatform: {
+    platform: {
         type: String,
         required: true
     },
-    accessOfMaterial: {
+    access: {
         type: Number,
         required: true
     },
-    interactionWithInstructors: {
+    interaction: {
         type: Number,
         required: true
     },
-    onlineTool: {
-        type: String,
+    recommendations: {
+        type: [String],
         required: true
     },
     comments: {

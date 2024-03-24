@@ -1,7 +1,7 @@
 // src/components/SignUp.js
 
 import { useState } from 'react';
-import UserServices from '../../api/userApi';
+import { UserServices } from '../../api/userApi';
 import './signup.styles.css';
 
 function SignUp() {
@@ -17,7 +17,6 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log('submit');
       await UserServices.registerUser(userData).then(() => {
           setUserData({});
       });
