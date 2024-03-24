@@ -17,8 +17,6 @@ function SignIn({onSignIn}) {
     e.preventDefault();
     try {
         const response = await UserServices.loginUser(loginData);
-        console.log("API Response:", response); // Confirm the response structure
-
         if (response.accessToken) {
             // Proceed with user sign-in flow
             onSignIn(response.accessToken);

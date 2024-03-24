@@ -8,6 +8,7 @@ import SurveyModal from "./components/SurveyModal";
 function SurveyForm({ onSignOut }) {
     const [surveys, setSurveys] = useState([]);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
+    const [surveyInfo, setSurveyInfo] = useState({});
 
     useEffect(
         () => {
@@ -16,19 +17,35 @@ function SurveyForm({ onSignOut }) {
         []
     );
 
+    useEffect(
+        () => {
+            if (surveyInfo.ID) {
+                setIsVisibleModal(true);
+            }
+        },
+        [surveyInfo]
+    );
+
   return (
       <div className="container">
           <SurveyModal
               title="Create Survey"
               showModal={isVisibleModal}
-              onClose={() => setIsVisibleModal(false)}
-              handleUpdateSurvey={handleCreateSurvey}
+              onClose={handleCloseModal}
+              onDelete={handleDeleteSurvey}
+              handleUpdateSurvey={surveyInfo.ID ? handleUpdateSurvey : handleCreateSurvey}
+              isUpdateMode={surveyInfo.ID ? true : false}
+              initialValues={surveyInfo.ID ? surveyInfo.Details : null}
           />
-            <h1>Survey Form</h1>
+            <h1>Online Learning Experience</h1>
             {surveys && surveys.length > 0 ? (
                 <div className="surveys-container">
                     {surveys.map((survey, index) => (
-                        <div key={index} className="survey-item">
+                        <div
+                            key={index}
+                            className="survey-item"
+                            onClick={() => handleOpenSurvey(survey)}
+                        >
                             {`Survey ${index + 1}:`}
                         </div>
                     ))}
@@ -52,7 +69,43 @@ function SurveyForm({ onSignOut }) {
     async function handleCreateSurvey(values) {
         await SurveyServices.CreateSurvey(values)
         fetchSurveys();
-        setIsVisibleModal(false)
+        handleCloseModal();
+    }
+
+    async function handleUpdateSurvey(values) {
+        await SurveyServices.updateSurvey(surveyInfo.ID, values);
+        fetchSurveys();
+        handleCloseModal();
+    }
+
+    async function handleDeleteSurvey() {
+        await SurveyServices.deleteSurvey(surveyInfo.ID);
+        fetchSurveys();
+        handleCloseModal();
+    }
+
+    function handleOpenSurvey(survey) {
+        const surveyDetails = {
+            name: survey.name,
+            gender: survey.gender,
+            email: survey.email,
+            interaction: survey.interaction,
+            platform: survey.platform,
+            recommendations: survey.recommendations,
+            access: survey.access
+        };
+
+        setSurveyInfo({
+            ID: survey._id,
+            Details: surveyDetails,
+        });
+    }
+
+    function handleCloseModal() {
+        setIsVisibleModal(false);
+        if (surveyInfo.ID) {
+            setSurveyInfo({});
+        }
     }
 }
 
