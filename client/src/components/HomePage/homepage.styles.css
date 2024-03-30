@@ -1,0 +1,21 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh; /* This will take the full height of the viewport */
+    background-color: white;
+  }
+  
+  .logo {
+    width: 150px; /* Adjust the size of your logo as needed */
+    margin-bottom: 20px; /* Space between logo and team name */
+  }
+  
+  h2 {
+    color: #333; /* Dark gray color for the team name */
+  }
+  
+  .description {
+    color: cadetblue;
+  }

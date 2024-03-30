@@ -5,7 +5,7 @@ import './surveyForm.styles.css'
 import SurveyModal from "./components/SurveyModal";
 
 /* eslint-disable react/prop-types */
-function SurveyForm({ onSignOut }) {
+function SurveyForm() {
     const [surveys, setSurveys] = useState([]);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [surveyInfo, setSurveyInfo] = useState({});
@@ -26,8 +26,8 @@ function SurveyForm({ onSignOut }) {
         [surveyInfo]
     );
 
-  return (
-      <div className="container">
+    return (
+        <div className="container">
           <SurveyModal
               title="Create Survey"
               showModal={isVisibleModal}
@@ -56,11 +56,12 @@ function SurveyForm({ onSignOut }) {
                 </>
           )}
           <button onClick={() => setIsVisibleModal(true)} style={{ marginTop: '20px' }}>Create Survey</button>
-          <button onClick={onSignOut} style={{ marginTop: '20px' }}>Sign Out</button>
         </div>
   );
     
     async function fetchSurveys() {
+        const token = localStorage.getItem('userToken');
+        console.log('SurveyForm', token);
         const response = await SurveyServices.fetchAllSurveys();
 
         setSurveys(response.data);

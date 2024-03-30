@@ -20,9 +20,12 @@ export class UserServices {
   
 export class SurveyServices {
     static async fetchAllSurveys() {
+        const userToken = localStorage.getItem('userToken');
+        console.log('userToken', userToken);
+        
         return await axios.get(`http://localhost:8080/api/surveys`, {
             headers: {
-               Authorization: token ? `Bearer ${token}` : undefined,
+               Authorization: token ? `Bearer ${userToken}` : undefined,
            }
        });
     }
