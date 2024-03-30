@@ -3,9 +3,11 @@ import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import SurveyForm from './components/SurveyForm';
 import './App.styles.css'
+import Navbar from './components/Navbar';
+import HomePage from './components/HomePage';
 
 function App() {
-  const [showSignUp, setShowSignUp] = useState(false);
+  const [screen, setScreen] = useState('HOME');
   // Introduce state to keep track of user's authentication status
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -27,24 +29,57 @@ function App() {
     setIsAuthenticated(false);
   };
 
+  useEffect(
+    () => {
+      if (isAuthenticated) {
+        setScreen('HOME');
+      } else {
+        setScreen('HOME');
+      }
+    },
+    [isAuthenticated]
+  );
 
   return (
     <div className='root'>
+      <Navbar
+          screen={screen}
+          onSignOut={handleSignOut}
+          isAuthenticated={isAuthenticated}
+          handleSetScreen={handleSetScreen}
+      />
       {isAuthenticated ? (
-        <SurveyForm onSignOut={handleSignOut} />
-      ) : showSignUp ? (
-        <div>
-          <SignUp />
-          <button onClick={() => setShowSignUp(false)}>Already have an account? Sign In</button>
-        </div>
+        screen === 'SURVEYS'
+          ? (
+            <SurveyForm />
+          )
+          : screen === 'HOME'
+            ? <HomePage isAuthenticated={isAuthenticated} />
+            : null
       ) : (
-        <div>
-          <SignIn onSignIn={handleSignIn} />
-          <button onClick={() => setShowSignUp(true)}>Need an account? Sign Up</button>
-        </div>
-      )}
+        screen === 'SIGN_UP'
+          ? (
+            <div className='wrapper'>
+              <SignUp />
+            </div>
+            )
+            : screen === 'SIGN_IN'
+              ? (
+                <div className='wrapper'>
+                  <SignIn onSignIn={handleSignIn} />
+                </div>
+              )
+              : screen === 'HOME'
+                ? <HomePage />
+                : null
+      )
+      }
     </div>
   );
+
+  function handleSetScreen(value) {
+    setScreen(value);
+  }
 }
 
 export default App;
