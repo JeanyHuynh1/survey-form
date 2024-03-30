@@ -50,7 +50,7 @@ const loginUser = async (req, res) => {
             config.jwtSecret,
             { expiresIn: "60m" }
         );
-        res.status(200).json({ accessToken });
+        res.status(200).json({"accessToken": accessToken, "username": user.username, "email": user.email, "created_at": user.createdAt});
     } else {
         res.status(401).json({message: "email or password is not valid"});
     }
