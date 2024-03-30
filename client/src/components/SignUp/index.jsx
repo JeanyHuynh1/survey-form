@@ -24,6 +24,7 @@ function SignUp() {
 
   return (
     <form onSubmit={handleSubmit} className="signup-form">
+      <h2 className="title">Sign Up</h2>
       <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
       <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
       <input type="password" name="password" placeholder="Password" onChange={handleChange} required />

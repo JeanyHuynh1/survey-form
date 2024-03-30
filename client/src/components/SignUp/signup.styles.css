@@ -10,6 +10,9 @@
     width: 300px;
 
     background-color: white;
+    border: 1px solid #ccc; /* Optional: adds a subtle border around the container */
+    border-radius: 10px; /* Adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle drop shadow for depth */
   }
   
   .signup-form input[type="text"],
@@ -36,3 +39,7 @@
     background-color: #0056b3;
   }
   
+  .title {
+    align-self: flex-start;
+    margin: 0;
+  }

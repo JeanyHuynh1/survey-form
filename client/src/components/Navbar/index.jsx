@@ -1,19 +1,15 @@
 /* eslint-disable react/prop-types */
+import logo from '../../assets/logo.webp';
 import './navbar.styles.css'
+
 function Navbar({screen, isAuthenticated, onSignOut, handleSetScreen}) {
     return (
         <div className="navbar">
+            <img width={32} height={32}  src={logo} alt="" />
             <h2 className="title">
-                Survey Form
+                Insightful Explorers
             </h2>
             <div className="navbar-items">
-                <h3
-                    className="item"
-                    onClick={() => handleSetScreen('HOME')}
-                    style={{ color: screen === 'HOME' && 'red'}}
-                >
-                    Home
-                </h3>
                 {
                     !isAuthenticated ? (
                         <div className="items">
@@ -37,10 +33,17 @@ function Navbar({screen, isAuthenticated, onSignOut, handleSetScreen}) {
                             <div className="items">
                                 <h3
                                     className="item"
-                                    onClick={() => handleSetScreen('SURVEYS')}
-                                    style={{ color: screen === 'SURVEYS' && 'red'}}
+                                    onClick={() => handleSetScreen('HOME')}
+                                    style={{ color: screen === 'HOME' && 'red'}}
                                 >
-                                    Surveys
+                                    Home
+                                </h3>
+                                <h3
+                                    className="item"
+                                    onClick={() => handleSetScreen('PROFILE')}
+                                    style={{ color: screen === 'PROFILE' && 'red'}}
+                                >
+                                    Profile
                                 </h3>
                                 <h3
                                     className="item"

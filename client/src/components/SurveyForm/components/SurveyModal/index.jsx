@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { Modal, Form, Input, Select, Rate, Checkbox, message } from 'antd';
 
-function SurveyModal({ title, showModal, onClose, isUpdateMode, initialValues, onDelete, handleUpdateSurvey }) {
+function SurveyModal({ title, showModal, onClose, isUpdateMode, initialValues, surveyID, onDelete, handleUpdateSurvey }) {
     const [form] = Form.useForm();
     const { Option } = Select;
 
@@ -26,13 +26,6 @@ function SurveyModal({ title, showModal, onClose, isUpdateMode, initialValues, o
         }).catch((info) => {
             console.log('Validate Failed:', info);
         });
-    };
-
-    const handleDelete = () => {
-        // Confirm deletion with the user, then call onDelete
-        onDelete(); // Assuming onDelete handles the deletion
-        form.resetFields();
-        message.error('Survey deleted successfully');
     };
   
     const handleCancel = () => {
@@ -86,7 +79,14 @@ function SurveyModal({ title, showModal, onClose, isUpdateMode, initialValues, o
       </Modal>
   );
     
-  async function handleCreateOrUpdateSurvey(values) {
+  function handleDelete() {
+    // Confirm deletion with the user, then call onDelete
+    onDelete(surveyID); // Assuming onDelete handles the deletion
+    form.resetFields();
+    message.error('Survey deleted successfully');
+  }
+    
+  function handleCreateOrUpdateSurvey(values) {
       handleUpdateSurvey(values);
       onClose(); // Close modal
       form.resetFields(); // Reset form fields

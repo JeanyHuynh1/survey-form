@@ -6,24 +6,42 @@
 }
 
 .surveys-container {
-    width: 80%;
+    width: 60%; /* Reduced from 80% to make the container narrower */
     background-color: white;
     margin-top: 20px;
     overflow-y: auto; /* Enables vertical scrolling */
     max-height: 400px; /* Adjust based on your needs */
-    border: 1px solid #ccc; /* Optional: adds border around the container */
+    border: 1px solid #ccc; /* Optional: adds a subtle border around the container */
+    border-radius: 10px; /* Adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle drop shadow for depth */
+    padding: 10px; /* Adds some padding inside the container for better content spacing */
+    margin: 20px auto; /* Centers the container and adds vertical spacing */
 }
 
 .survey-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     padding: 10px;
     border-bottom: 1px solid #eee; /* Border bottom for each item */
     color: black; /* Ensure text color is visible */
-    background-color: white; /* Temporarily make background always visible */
     cursor: pointer;
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fa-trash {
+    color: red;
 }
 
 .survey-item:hover {
-    background-color: #676565; /* Hover effect */
+    background-color: #f9f9f9; /* Light grey background on hover for better interactivity */
 }
 
 
