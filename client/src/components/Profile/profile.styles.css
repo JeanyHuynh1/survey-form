@@ -1,0 +1,24 @@
+/* Profile.css */
+.profile-container {
+  background-color: white;
+  border: 1px solid #ccc; /* Optional: adds a subtle border around the container */
+  border-radius: 10px; /* Adds rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle drop shadow for depth */
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+  text-align: left;
+  color: #333; /* Dark gray for better readability */
+}
+
+.profile-container h2 {
+  color: #222; /* Slightly darker shade for headings */
+  margin-top: 0;
+  margin-bottom: 16px; /* Adds some space below the heading */
+}
+
+.profile-container p {
+  color: #444; /* Lighter gray for paragraph text */
+  line-height: 1.5; /* Improves readability of paragraphs */
+  margin-bottom: 10px; /* Adds some space between paragraphs */
+}

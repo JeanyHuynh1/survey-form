@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import SurveyForm from './components/SurveyForm';
 import './App.styles.css'
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
+import Profile from './components/Profile';
 
 function App() {
   const [screen, setScreen] = useState('HOME');
@@ -34,7 +34,7 @@ function App() {
       if (isAuthenticated) {
         setScreen('HOME');
       } else {
-        setScreen('HOME');
+        setScreen('SIGN_IN');
       }
     },
     [isAuthenticated]
@@ -49,13 +49,11 @@ function App() {
           handleSetScreen={handleSetScreen}
       />
       {isAuthenticated ? (
-        screen === 'SURVEYS'
-          ? (
-            <SurveyForm />
-          )
-          : screen === 'HOME'
+          screen === 'HOME'
             ? <HomePage isAuthenticated={isAuthenticated} />
-            : null
+            : screen === 'PROFILE'
+              ? <Profile />
+              : null
       ) : (
         screen === 'SIGN_UP'
           ? (
@@ -69,9 +67,7 @@ function App() {
                   <SignIn onSignIn={handleSignIn} />
                 </div>
               )
-              : screen === 'HOME'
-                ? <HomePage />
-                : null
+              : null
       )
       }
     </div>

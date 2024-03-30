@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SurveyServices } from "../../api/userApi";
 import './surveyForm.styles.css'
 import SurveyModal from "./components/SurveyModal";
@@ -35,6 +37,7 @@ function SurveyForm() {
               onDelete={handleDeleteSurvey}
               handleUpdateSurvey={surveyInfo.ID ? handleUpdateSurvey : handleCreateSurvey}
               isUpdateMode={surveyInfo.ID ? true : false}
+              surveyID={surveyInfo.ID || ''}
               initialValues={surveyInfo.ID ? surveyInfo.Details : null}
           />
             <h1>Online Learning Experience</h1>
@@ -44,9 +47,14 @@ function SurveyForm() {
                         <div
                             key={index}
                             className="survey-item"
-                            onClick={() => handleOpenSurvey(survey)}
                         >
                             {`Survey ${index + 1}:`}
+                            <div className="icons">
+                                <>
+                                    <FontAwesomeIcon icon={faPenToSquare} onClick={() => handleOpenSurvey(survey)} />
+                                    <FontAwesomeIcon icon={faTrash} onClick={() => handleDeleteSurvey(survey._id)} />
+                                 </>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -60,8 +68,6 @@ function SurveyForm() {
   );
     
     async function fetchSurveys() {
-        const token = localStorage.getItem('userToken');
-        console.log('SurveyForm', token);
         const response = await SurveyServices.fetchAllSurveys();
 
         setSurveys(response.data);
@@ -79,8 +85,8 @@ function SurveyForm() {
         handleCloseModal();
     }
 
-    async function handleDeleteSurvey() {
-        await SurveyServices.deleteSurvey(surveyInfo.ID);
+    async function handleDeleteSurvey(surveyID) {
+        await SurveyServices.deleteSurvey(surveyID);
         fetchSurveys();
         handleCloseModal();
     }
