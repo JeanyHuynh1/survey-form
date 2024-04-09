@@ -5,11 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run client\" \"nodemon server.js\"",
+    "dev": "concurrently \"npm run client\" \"node server.js\"",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "client": "cd client && npm run dev"
+    "client": "cd ../client && npm run dev"
   },
   "repository": {
     "type": "git",

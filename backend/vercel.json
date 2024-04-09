@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "name": "surveys",
+    "builds": [
+       { "src": "server/express.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+       { "src": "/(.*)", "dest": "/server/express.js" }
+    ]
+ }
