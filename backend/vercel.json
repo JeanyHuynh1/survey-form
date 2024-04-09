@@ -2,9 +2,9 @@
     "version": 2,
     "name": "surveys",
     "builds": [
-        { "src": "./server/server.js", "use": "@vercel/node" }
+        { "src": "./server/express.js", "use": "@vercel/node" }
       ],      
       "routes": [
-        { "src": "/(.*)", "dest": "/server/server.js" }
+        { "src": "/(.*)", "dest": "/server/express.js" }
       ]      
  }
